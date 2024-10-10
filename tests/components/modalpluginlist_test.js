@@ -27,6 +27,7 @@ class ModalWithPlugins extends Component {
 
   onChange(editorState) {
     this.props.onChange(editorState);
+    this.props.toggleModalVisibility();
     this.setState({ editorState: editorState });
   }
 
@@ -88,14 +89,14 @@ describe("Sidebar Modal Component", () => {
   it("should callback a function received when receives onChange call", () => {
     const newEditorState = {};
     const modal = testContext.wrapper.find(ModalPluginList);
-    modal.instance().onChange(newEditorState);
+    modal.prop("onChange")(newEditorState);
     expect(testContext.onChangeSpy).toHaveBeenCalledWith(newEditorState);
   });
 
   it("should toggle visibility when receives onChange call", () => {
     const newEditorState = {};
     const modal = testContext.wrapper.find(ModalPluginList);
-    modal.instance().onChange(newEditorState);
+    modal.prop("onChange")(newEditorState);
     expect(testContext.toggleModalVisibilitySpy).toHaveBeenCalled();
   });
 });
